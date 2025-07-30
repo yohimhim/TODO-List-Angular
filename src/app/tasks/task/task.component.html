@@ -1,3 +1,10 @@
+@if (isEditingTask) {
+    <app-edit-task 
+        [task]="task" 
+        (cancel)="onCancelEdit()"
+        (save)="onSaveEdit()"
+    />
+}
 <article>
     <h2>{{ task.title }}</h2>
     <p>{{ task.summary }}</p>

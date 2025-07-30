@@ -41,4 +41,12 @@ export class TasksService {
         this.tasks.update(tasks => [...tasks, newTask]);
     }
 
+    editTask(taskId: string, taskData: NewTaskData) {
+      this.tasks.update(tasks => 
+        tasks.map(task =>
+          task.id === taskId ? { ...task, ...taskData } : task
+        )
+      )
+    };
+
 }
