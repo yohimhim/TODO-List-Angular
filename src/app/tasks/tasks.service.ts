@@ -1,5 +1,5 @@
 import { Injectable, signal } from "@angular/core";
-import { Task } from "./task/task.model";
+import { NewTaskData, Task } from "./task/task.model";
 
 @Injectable({providedIn: 'root'})
 export class TasksService {
@@ -30,6 +30,15 @@ export class TasksService {
 
     removeTask(id: string) {
         this.tasks.update(tasks => tasks.filter(task => task.id != id));
+    }
+
+    addTask(taskData: NewTaskData) {
+        const newTask: Task = {
+            id: Math.random().toString(),
+            ...taskData
+        };
+
+        this.tasks.update(tasks => [...tasks, newTask]);
     }
 
 }
