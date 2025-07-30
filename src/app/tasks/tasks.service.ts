@@ -49,4 +49,15 @@ export class TasksService {
       )
     };
 
+    updateTaskStatus(taskId: string) {
+      this.tasks.update(tasks => 
+        tasks.map(task =>
+          task.id === taskId ? { 
+            ...task,
+            status: task.status === 'COMPLETED' ? 'OPEN' : 'COMPLETED'
+          } : task 
+        )
+      );
+    }
+
 }

@@ -5,13 +5,15 @@
         (save)="onSaveEdit()"
     />
 }
-<article>
+<article [ngClass]="{ 'completed' : task.status === 'COMPLETED' }">
     <h2>{{ task.title }}</h2>
     <p>{{ task.summary }}</p>
-    <time>{{ task.dueDate }}</time>
+    <time>{{ task.dueDate | date:'fullDate' }}</time>
     <div class="actionButtons">
         <button (click)="onEditTask()">Edit</button>
         <button (click)="onDeleteTask()">Delete</button>
-        <button (click)="onCompleteTask()">Complete</button>
+        <button (click)="onCompleteTask()">
+            {{ task.status === 'COMPLETED' ? 'Undo' : 'Complete' }}
+        </button>
     </div>
 </article>

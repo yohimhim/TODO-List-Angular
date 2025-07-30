@@ -30,8 +30,20 @@ button {
 
 .actionButtons {
   display: flex;
-  justify-content: space-between; /* Evenly spread out buttons */
-  gap: 0.5rem; /* Optional: space between buttons */
-  margin-left: auto; /* Push to the right */
-  width: fit-content; /* Shrink to button size */
+  justify-content: space-between; 
+  gap: 0.5rem; 
+  margin-left: auto; 
+  width: fit-content; 
+}
+
+.completed {
+  background-color: #8f8d8d; 
+  opacity: 0.7;
+  padding: 1rem;
+}
+
+.completed p,
+.completed time {
+  text-decoration: line-through;
+  color: #0a0a0a;
 }
