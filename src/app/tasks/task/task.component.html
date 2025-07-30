@@ -1,0 +1,10 @@
+<article>
+    <h2>{{ task.title }}</h2>
+    <p>{{ task.summary }}</p>
+    <time>{{ task.dueDate }}</time>
+    <div class="actionButtons">
+        <button (click)="onEditTask()">Edit</button>
+        <button (click)="onDeleteTask()">Delete</button>
+        <button (click)="onCompleteTask()">Complete</button>
+    </div>
+</article>
