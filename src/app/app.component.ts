@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { TasksComponent } from "./tasks/tasks.component";
+import { AuthService } from './oauth.service';
 
 
 @Component({
@@ -13,4 +13,7 @@ import { TasksComponent } from "./tasks/tasks.component";
 })
 export class AppComponent {
   protected readonly title = signal('TODO-APP');
+
+  constructor(private readonly google: AuthService) {}
+
 }
