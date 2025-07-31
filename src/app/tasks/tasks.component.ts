@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { TasksService } from './tasks.service';
+import { AuthService } from '../oauth.service';
 
 @Component({
   selector: 'app-tasks',

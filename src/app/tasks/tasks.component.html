@@ -8,7 +8,6 @@
     <menu>
         <button class="addTask" (click)="onStartAddTask()">Add Task</button>
     </menu>
-
     <ul>
         @for (task of tasks(); track task.id) {
             <li>

@@ -1,3 +1,16 @@
+.completed {
+  background-color: #8f8d8d; 
+  opacity: 0.7;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.completed p,
+.completed time {
+  text-decoration: line-through;
+  color: #0a0a0a;
+}
+
 article {
   padding: 1rem;
   color: #25113d;
@@ -36,14 +49,3 @@ button {
   width: fit-content; 
 }
 
-.completed {
-  background-color: #8f8d8d; 
-  opacity: 0.7;
-  padding: 1rem;
-}
-
-.completed p,
-.completed time {
-  text-decoration: line-through;
-  color: #0a0a0a;
-}

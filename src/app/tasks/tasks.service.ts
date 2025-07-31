@@ -1,23 +1,12 @@
-import { effect, Injectable, signal } from "@angular/core";
+import { effect, inject, Injectable, signal } from "@angular/core";
 import { NewTaskData, Task } from "./task/task.model";
+import { AuthService } from "../oauth.service";
 
 @Injectable({providedIn: 'root'})
 export class TasksService {
-    private tasks = signal<Task[]>([
-    // {
-    //   id: 't1',
-    //   title: 'Master Angular',
-    //   summary:
-    //     'Learn all of Angular!',
-    //   dueDate: '2025-12-31',
-    // },
-    // {
-    //   id: 't2',
-    //   title: 'Buy Milk',
-    //   summary: 'For my birthday cake',
-    //   dueDate: '2025-10-02',
-    // },
-  ]);
+  private authService = inject(AuthService);
+
+  private tasks = signal<Task[]>([]);
 
   constructor() {
     const localTasks = localStorage.getItem('tasks');
@@ -36,46 +25,50 @@ export class TasksService {
 
   }
 
-    getTasks = this.tasks.asReadonly();
+  getTasks = this.tasks.asReadonly();
 
-    removeTask(id: string) {
-        this.tasks.update(tasks => tasks.filter(task => task.id != id));
-        this.saveTasks();
-    }
+  removeTask(id: string) {
+    this.tasks.update(tasks => tasks.filter(task => task.id != id));
+    this.saveTasks();
+  }
 
-    addTask(taskData: NewTaskData) {
-        const newTask: Task = {
-            id: Math.random().toString(),
-            ...taskData
-        };
+  addTask(taskData: NewTaskData) {
+    const user = this.authService.userEmail;
+    if (!user) return;
 
-        this.tasks.update(tasks => [...tasks, newTask]);
-        this.saveTasks();
-    }
-
-    editTask(taskId: string, taskData: NewTaskData) {
-      this.tasks.update(tasks => 
-        tasks.map(task =>
-          task.id === taskId ? { ...task, ...taskData } : task
-        )
-      )
-      this.saveTasks();
+    const newTask: Task = {
+        id: Math.random().toString(),
+        ...taskData,
+        userId: user
     };
 
-    updateTaskStatus(taskId: string) {
-      this.tasks.update(tasks => 
-        tasks.map(task =>
-          task.id === taskId ? { 
-            ...task,
-            status: task.status === 'COMPLETED' ? 'OPEN' : 'COMPLETED'
-          } : task 
-        )
-      );
-      this.saveTasks();
-    }
+    this.tasks.update(tasks => [...tasks, newTask]);
+    this.saveTasks();
+  }
 
-    private saveTasks() {
-      localStorage.setItem('tasks', JSON.stringify(this.tasks()));
-    }
+  editTask(taskId: string, taskData: NewTaskData) {
+    this.tasks.update(tasks => 
+      tasks.map(task =>
+        task.id === taskId ? { ...task, ...taskData } : task
+      )
+    )
+    this.saveTasks();
+  };
+
+  updateTaskStatus(taskId: string) {
+    this.tasks.update(tasks => 
+      tasks.map(task =>
+        task.id === taskId ? { 
+          ...task,
+          status: task.status === 'COMPLETED' ? 'OPEN' : 'COMPLETED'
+        } : task 
+      )
+    );
+    this.saveTasks();
+  }
+
+  private saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks()));
+  }
 
 }

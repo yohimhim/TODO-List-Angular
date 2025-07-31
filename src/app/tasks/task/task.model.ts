@@ -6,6 +6,7 @@ export interface Task {
   summary: string;
   dueDate: string;
   status?: TaskStatus;
+  userId: string;
 }
 
 export interface NewTaskData {

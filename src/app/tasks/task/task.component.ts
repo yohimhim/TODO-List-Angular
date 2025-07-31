@@ -18,7 +18,6 @@ export class TaskComponent {
     isEditingTask = false;
 
     private tasksService = inject(TasksService);
-
     onCompleteTask() {
       this.tasksService.updateTaskStatus(this.task.id);
       console.log(this.task.status);
