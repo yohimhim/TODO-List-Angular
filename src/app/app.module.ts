@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { BrowserModule } from '@angular/platform-browser';
 
-
-
 @NgModule({
   declarations: [
   ],
