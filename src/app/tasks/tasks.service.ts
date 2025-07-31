@@ -33,13 +33,14 @@ export class TasksService {
   }
 
   addTask(taskData: NewTaskData) {
-    const user = this.authService.userEmail;
-    if (!user) return;
+    const user = this.authService.userProfile();
+    const userEmail = user?.info.email;
+    if (!userEmail) return;
 
     const newTask: Task = {
         id: Math.random().toString(),
         ...taskData,
-        userId: user
+        userId: userEmail
     };
 
     this.tasks.update(tasks => [...tasks, newTask]);

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { Subject } from 'rxjs';
 
@@ -24,9 +24,8 @@ export interface UserInfo {
 })
 export class AuthService {
 
-  userProfileSubject = new Subject<UserInfo>();
-  private currentUserInfo: UserInfo | null = null;
-
+  private user = signal<UserInfo | null>(null);
+  userProfile = this.user.asReadonly();     
 
   constructor(private readonly oAuthService: OAuthService) {
     oAuthService.configure(oAuthConfig);
@@ -36,38 +35,12 @@ export class AuthService {
           oAuthService.initLoginFlow();
         } else {
           oAuthService.loadUserProfile().then( (userProfile) => {
-            this.userProfileSubject.next(userProfile as UserInfo);
-            console.log(JSON.stringify(userProfile));
-            
-            const profile = userProfile as UserInfo;
+            console.log('Loaded user: ' + userProfile);
+            this.user.set(userProfile as UserInfo);
 
-            const userId = profile.info.sub;
-            console.log('User ID: ' + userId);
-
-            const email = profile.info.email;
-            console.log('Email: ' + email);
-
-            const name = profile.info.name;
-            console.log('Name: ' + name);
-
-            const profilePicture = profile.info.picture;
-            console.log('Profile Picture: ' + profilePicture);
-            this.currentUserInfo = profile;
-            this.userProfileSubject.next(profile);
-
-          })
+          });
         }
-      })
-    })
+      });
+    });
   }
-
-  get userEmail() {
-    return this.currentUserInfo?.info.email ?? null;
-  }
-
-  get userProfilePicture() {
-    return this.currentUserInfo?.info.picture ?? null;
-  }
-
-  
 }
