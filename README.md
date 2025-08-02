@@ -1,59 +1,46 @@
-# TODOAPP
+# 📝 Angular Task Manager App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.1.
+This is a personal task manager built with **Angular**, featuring:
+- Google OAuth login
+- Per-user task storage
+- Reactive UI using Angular Signals
+- LocalStorage-based persistence
+- Task creation, editing, completion toggling, and deletion
 
-## Development server
+---
 
-To start a local development server, run:
+## 🔐 Features
 
-```bash
-ng serve
-```
+- ✅ **Google Login (OAuth2)**
+- 📋 **Add, Edit, Complete, and Delete Tasks**
+- 🔒 **Only see your own tasks**
+- 🧠 **State management with Angular Signals**
+- 💾 **LocalStorage persistence**
+- 💡 **Reactive UI with `@for`, `computed`, and `effect`**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠 Tech Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Angular 17+**
+- **TypeScript**
+- **Angular Signals**
+- **Google OAuth (via `angular-oauth2-oidc`)**
+- **HTML/CSS**
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚀 Getting Started
 
-```bash
-ng generate --help
-```
+### Prerequisites
 
-## Building
+- Node.js & npm
+- Angular CLI (`npm install -g @angular/cli`)
+- Google OAuth credentials set up in the [Google Developer Console](https://console.cloud.google.com/apis/credentials)
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Clone and Install
 
 ```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+git clone https://github.com/your-username/angular-task-manager.git
+cd angular-task-manager
+npm install
